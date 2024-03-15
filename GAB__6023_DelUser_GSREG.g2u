@@ -1,0 +1,14 @@
+Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+
+V.Local.iUserID.Declare
+V.Local.sQuery.Declare
+
+	Function.Global.Security.GetUserID(V.Caller.User, V.Caller.CompanyCode, V.Local.iUserID)
+	F.ODBC.Connection!ConC.OpenConnection(V.Ambient.Ccon,V.Ambient.CUser,V.Ambient.CPass)
+	f.Intrinsic.String.Build("Delete GS_REGISTRY where user_id='{0}'", V.Local.iUserID,v.Local.sQuery)
+	f.ODBC.Connection!ConC.Execute(v.Local.sQuery)
+	
+Program.Sub.Main.End
